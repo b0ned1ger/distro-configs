@@ -1,0 +1,151 @@
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+"let mapleader=","
+set tags=tags
+set ttyfast
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#enabled = 0
+set laststatus=2
+
+set t_Co=256
+set cscopetag
+set incsearch
+set hidden
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'bling/vim-airline'
+Bundle 'Tagbar'
+
+" My Bundles here
+"
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+"Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'jellybeans.vim'
+Bundle 'matchit.zip'
+Bundle 'valinskas/manpageview'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
+Bundle 'tomasr/molokai'
+Bundle 'elzr/vim-json'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'vim-ruby/vim-ruby'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'universal-ctags/ctags'
+Plugin 'preservim/nerdcommenter'
+Bundle 'tpope/vim-unimpaired'
+
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:agprg="<custom-ag-path-goes-here> --column"
+
+"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Bundle 'tpope/vim-rails.git'
+
+" vim-scripts repos
+"Bundle 'L9'
+"Bundle 'FuzzyFinder'
+
+" non github repos
+"Bundle 'git://git.wincent.com/command-t.git'
+" ...
+
+syntax enable
+if has('gui_running')
+    set background=dark
+    colo solarized
+else
+    colo jellybeans
+endif
+
+filetype plugin indent on     " required!
+
+"au FileType javascript  call FT_javascript()
+"au FileType html        call FT_html()
+"au FileType c		call FT_c()
+
+"function FT_javascript()
+  "setlocal tabstop=2
+  "setlocal softtabstop=2
+  "setlocal shiftwidth=2
+  "setlocal expandtab
+"endfunction
+
+"function FT_html()
+  "setlocal tabstop=4
+  "setlocal softtabstop=4
+  "setlocal shiftwidth=4
+  "setlocal expandtab
+"endfunction
+
+"function FT_c()
+  "set cino=g0:0t0(0
+  "set noet
+"endfunction
+
+
+"function ShowSpaces(...)
+	"let @/='\v(\s+$)|( +\ze\t)'
+	"let oldhlsearch=&hlsearch
+	"if !a:0
+		"let &hlsearch=!&hlsearch
+	"else
+		"let &hlsearch=a:1
+	"end
+	"return oldhlsearch
+"endfunction
+
+"function TrimSpaces() range
+	"let oldhlsearch=ShowSpaces(1)
+	"execute a:firstline.",".a:lastline."substitute ///gec"
+	"let &hlsearch=oldhlsearch
+"endfunction
+
+"command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+"command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+
+
+nmap		<F2> :GitGutterToggle<cr>
+nmap		<F3> :TagbarOpenAutoClose<cr>
+nmap		<F4> :NERDTreeToggle<cr>
+nmap		<F5> :sp<Return>
+nmap		<F6> :vsp<Return>
+nmap		<F7> o A_PRINTF_ALWAYS("[<------->]DEBUG:     %s %d\n", __func__, __LINE__);<esc>==
+nnoremap	<F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+nnoremap	<S-F8> :set nohls<CR>
+nmap		<F9> o printf("[<------->]DEBUG:     %s %d\n", __func__, __LINE__);<esc>==
+nnoremap	<F12>     :ShowSpaces 1<CR>
+nnoremap	<S-F12>   m`:TrimSpaces<CR>``
+vnoremap	<S-F12>   :TrimSpaces<CR>
+
+"rebind my favorite commands from Git.vim for Fugitive
+nmap <leader>gs :Gstatus<cr>
+nmap <leader>gc :Gcommit<cr>
+nmap <leader>ga :Gwrite<cr>
+nmap <leader>gl :Glog<cr>
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gb :Gblame<cr>
+
+nnoremap <silent> <leader>dp V:diffput<cr>
+nnoremap <silent> <leader>dg V:diffget<cr>
+
+nmap [] :bd<CR>
+
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
